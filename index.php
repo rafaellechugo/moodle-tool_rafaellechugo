@@ -15,15 +15,19 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package   tool_rafaellechugo
- * @copyright 2018, Rafael Lechugo <rafael@moodle.com>
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Plugin creation exercise for Moodle Dev course.
+ *
+ * @package    tool_rafaellechugo
+ * @copyright  2018 Rafael Lechugo
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+require_once(__DIR__ . '/../../../config.php');
+$url = new moodle_url('/admin/tool/rafaellechugo/index.php');
+$PAGE->set_context(context_system::instance());
+$PAGE->set_url($url);
+$PAGE->set_pagelayout('report');
+$PAGE->set_title('My first plugin');
+$PAGE->set_heading(get_string('pluginname', 'tool_todolist'));
 
-$plugin->version = 2018080901;
-$plugin->requires = 2018050800;
-$plugin->component = 'tool_rafaellechugo';
-$plugin->maturity = MATURITY_ALPHA;
-$plugin->release = '1.1';
+echo get_string('helloworld', 'tool_rafaellechugo');
