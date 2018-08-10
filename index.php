@@ -25,18 +25,18 @@
 // Standard GPL and phpdocs
 require_once(__DIR__ . '/../../../config.php');
 
+$id = required_param('id', PARAM_ALPHANUMEXT);
+
 $url = new moodle_url('/admin/tool/rafaellechugo/index.php');
 $PAGE->set_context(context_system::instance());
-$PAGE->set_url($url);
+$PAGE->set_url($url, array('id' => $id));
 $PAGE->set_pagelayout('report');
 $PAGE->set_title('Hello to the todo list');
 $PAGE->set_heading(get_string('pluginname', 'tool_rafaellechugo'));
 
+
 echo $OUTPUT->header();
 
-$courseid = '2';
-var_dump($courseid);
-
-echo html_writer::div(get_string('helloworld', 'tool_rafaellechugo', $courseid));
+echo html_writer::div(get_string('helloworld', 'tool_rafaellechugo', $id));
 
 echo $OUTPUT->footer();
