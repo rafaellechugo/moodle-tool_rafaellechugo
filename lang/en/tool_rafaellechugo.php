@@ -23,4 +23,7 @@
  */
 
 $string['pluginname'] = 'My first Moodle plugin';
-$string['helloworld'] = 'This course id is {$a}.';
+
+$string['course_data_display_1'] = 'Information about the course \'{$a}\'.';
+$string['course_data_display_2'] = 'The course format is {$a->format}, and it started at {$a->startdate}.';
+$string['course_data_display_3'] = 'The course category is {$a}.';
