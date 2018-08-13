@@ -43,7 +43,7 @@ class tool_rafaellechugo_print_data extends table_sql {
     public function __construct($uniqueid) {
 
         global $DB;
-       
+
         $rec = $DB->get_records_sql('SELECT * FROM {tool_rafaellechugo}
                                     WHERE courseid = ?',
                                     array($uniqueid));
