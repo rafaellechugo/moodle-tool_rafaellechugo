@@ -23,9 +23,9 @@
  */
 
 // Standard GPL and phpdocs.
-require_login();
-
 require_once(__DIR__ . '/../../../config.php');
+
+require_login();
 
 global $DB;
 
