@@ -24,6 +24,7 @@
 
 // Standard GPL and phpdocs.
 require_once(__DIR__ . '/../../../config.php');
+require_once(__DIR__ . '/classes/print_data.php');
 
 require_login();
 
@@ -60,5 +61,7 @@ echo html_writer::div(get_string('course_data_display_2', 'tool_rafaellechugo', 
                                     'format' => $coursedata[$id]->format,
                                     'startdate' => date("Y-m-d", $coursedata[$id]->startdate))));
 echo html_writer::div(get_string('course_data_display_3', 'tool_rafaellechugo', $coursecategory[$coursedata[$id]->category]->name));
+
+$print = new tool_rafaellechugo_print_data($id);
 
 echo $OUTPUT->footer();
