@@ -22,7 +22,9 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// Standard GPL and phpdocs
+// Standard GPL and phpdocs.
+require_login();
+
 require_once(__DIR__ . '/../../../config.php');
 
 global $DB;
@@ -47,7 +49,7 @@ $coursecategory    = $DB->get_records_sql($query);
 $coursedata        = $DB->get_records(
                             'course',
                             array('id' => $id),
-                            null, 
+                            null,
                             'id, category, fullname, format, startdate'
                     );
 
@@ -55,8 +57,8 @@ echo $OUTPUT->header();
 
 echo html_writer::div(get_string('course_data_display_1', 'tool_rafaellechugo', $coursedata[$id]->fullname));
 echo html_writer::div(get_string('course_data_display_2', 'tool_rafaellechugo', array(
-                                                                                'format' => $coursedata[$id]->format, 
-                                                                                'startdate' => date("Y-m-d", $coursedata[$id]->startdate))));
+                                    'format' => $coursedata[$id]->format,
+                                    'startdate' => date("Y-m-d", $coursedata[$id]->startdate))));
 echo html_writer::div(get_string('course_data_display_3', 'tool_rafaellechugo', $coursecategory[$coursedata[$id]->category]->name));
 
 echo $OUTPUT->footer();

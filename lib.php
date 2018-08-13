@@ -21,7 +21,7 @@
  * @copyright  2018 Rafael Lechugo
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
- 
+
 defined('MOODLE_INTERNAL') || die;
 
 function tool_rafaellechugo_extend_navigation_course($navigation, $course, $context) {
