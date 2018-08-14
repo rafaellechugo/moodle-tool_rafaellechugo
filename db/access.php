@@ -15,25 +15,26 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin creation exercise for Moodle Dev course.
+ * Capabilities
  *
  * @package    tool_rafaellechugo
- * @copyright  2018 Rafael Lechugo
+ * @copyright  2018 Rafael Lechugo <rafael@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('MOODLE_INTERNAL') || die();
 
-function tool_rafaellechugo_extend_navigation_course($navigation, $course, $context) {
+$capabilities = array(
 
-    if (has_capability('tool/rafaellechugo:view', $context)) {
-        $navigation->add(
-            get_string('pluginname', 'tool_rafaellechugo'),
-            new moodle_url('/admin/tool/rafaellechugo/index.php', ['id' => $course->id]),
-            navigation_node::TYPE_SETTING,
-            get_string('pluginname', 'tool_rafaellechugo'),
-            'rafaellechugo',
-            new pix_icon('icon', '', 'tool_rafaellechugo')
-        );
-    }
-}
+    'tool/rafaellechugo:view' => array(
+        'riskbitmask' => RISK_PERSONAL,
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_COURSE
+    ),
+
+    'tool/rafaellechugo:edit' => array(
+        'riskbitmask' => RISK_PERSONAL,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE
+    )
+);

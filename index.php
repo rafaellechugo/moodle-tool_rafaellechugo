@@ -26,11 +26,15 @@
 require_once(__DIR__ . '/../../../config.php');
 require_once(__DIR__ . '/classes/print_data.php');
 
-require_login();
-
 global $DB;
 
 $id = required_param('id', PARAM_ALPHANUMEXT);
+
+$course = $DB->get_record('course', array('id'=>$id), '*', MUST_EXIST);
+require_login($course);
+
+$systemcontext = context_course::instance($course->id);
+require_capability('tool/rafaellechugo:view', $systemcontext);
 
 $url = new moodle_url('/admin/tool/rafaellechugo/index.php');
 $PAGE->set_context(context_system::instance());
