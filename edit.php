@@ -44,38 +44,10 @@ $PAGE->set_pagelayout('report');
 $PAGE->set_title('My first Moodle plugin');
 $PAGE->set_heading(get_string('pluginname', 'tool_rafaellechugo'));
 
-// Retrieving data from DB.
-$query = "  SELECT id, name
-            FROM {course_categories}
-            WHERE id = (
-            SELECT category
-            FROM {course}
-            WHERE id = $id);";
-
-$coursecategory    = $DB->get_records_sql($query);
-$coursedata        = $DB->get_records(
-                            'course',
-                            array('id' => $id),
-                            null,
-                            'id, category, fullname, format, startdate'
-                    );
-
 echo $OUTPUT->header();
 
-// Showing some basic info.
-echo html_writer::div(get_string('course_data_display_1', 'tool_rafaellechugo', $coursedata[$id]->fullname));
-echo html_writer::div(get_string('course_data_display_2', 'tool_rafaellechugo', array(
-                                    'format' => $coursedata[$id]->format,
-                                    'startdate' => date("Y-m-d", $coursedata[$id]->startdate))));
-echo html_writer::div(get_string('course_data_display_3', 'tool_rafaellechugo', $coursecategory[$coursedata[$id]->category]->name));
-
-// Let's print the table.
-$print = new tool_rafaellechugo_print_data($id);
-
-// If the user has the capability, we'll print the "edit" link.
-if (has_capability('tool/rafaellechugo:edit', $systemcontext)) {
-    echo html_writer::link(new moodle_url('/admin/tool/rafaellechugo/edit.php', array('id' => $id)),
-                            'Edit (todo: to string)');
-}
+// Let's print the form.
+$mform = new tool_rafaellechugo_print_form($id);
+$mform->display();
 
 echo $OUTPUT->footer();
