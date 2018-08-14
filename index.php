@@ -30,7 +30,7 @@ global $DB;
 
 $id = required_param('id', PARAM_ALPHANUMEXT);
 
-$course = $DB->get_record('course', array('id'=>$id), '*', MUST_EXIST);
+$course = $DB->get_record('course', array('id' => $id), '*', MUST_EXIST);
 require_login($course);
 
 $systemcontext = context_course::instance($course->id);
