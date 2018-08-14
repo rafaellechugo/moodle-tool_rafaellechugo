@@ -35,13 +35,13 @@ require_once("$CFG->libdir/formslib.php");
  */
 class tool_rafaellechugo_print_form extends moodleform {
 
-    //Add elements to form
+    // Add elements to form
     public function definition() {
 
         $id = required_param('id', PARAM_ALPHANUMEXT);
 
         $mform = $this->_form;
- 
+
         $mform->addElement('text', 'name', 'Name (todo: string)');
         $mform->setType('name', PARAM_ALPHANUM);
         $mform->setDefault('name', 'Enter your name (todo: string)');
