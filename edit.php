@@ -47,7 +47,7 @@ $mform = new tool_rafaellechugo_print_form('edit.php?id='.$id.'&name='.$name.'&c
 
 /* If everything is okay with the petition, call the lib.php function
  * tool_rafaellechugo_add_entry to write the data on DB.
- * By the way, why do I have to require lib.php on this file? Shouldn't 
+ * By the way, why do I have to require lib.php on this file? Shouldn't
  * it be autoloaded?
  */
 if (!$mform->is_cancelled() && $data = $mform->get_data()) {
