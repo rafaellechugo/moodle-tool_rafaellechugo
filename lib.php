@@ -37,3 +37,19 @@ function tool_rafaellechugo_extend_navigation_course($navigation, $course, $cont
         );
     }
 }
+
+function tool_rafaellechugo_add_entry($context, $courseid, $name, $completed) {
+
+    global $DB;
+
+    if (has_capability('tool/rafaellechugo:edit', $context)) {
+
+        $record = new stdclass();
+        $record->courseid = $courseid;
+        $record->name = $name;
+        $record->completed = $completed;
+
+        $DB->insert_record('tool_rafaellechugo', $record);
+    }
+
+}

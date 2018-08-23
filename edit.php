@@ -22,19 +22,37 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// Standard GPL and phpdocs.
 require_once(__DIR__ . '/../../../config.php');
 require_once(__DIR__ . '/classes/print_data.php');
+require_once('lib.php');
 
-// Defining some useful variables.
+// Defining variables.
 global $DB;
+
 $id = required_param('id', PARAM_ALPHANUMEXT);
+$name = optional_param('name', 'unknown', PARAM_ALPHANUMEXT);
+$completed = optional_param('completed', 0, PARAM_BOOL);
+
 $course = $DB->get_record('course', array('id' => $id), '*', MUST_EXIST);
 
 // First, we need to be shure that the users are allowed to be here.
 require_login($course);
 $systemcontext = context_course::instance($course->id);
-require_capability('tool/rafaellechugo:view', $systemcontext);
+require_capability('tool/rafaellechugo:edit', $systemcontext);
+
+/* Creating a instance of "tool_rafaellechugo_print_form"
+ * and sending the action URL as a parameter (this page itself)
+ */
+$mform = new tool_rafaellechugo_print_form('edit.php?id='.$id.'&name='.$name.'&completed='.$completed);
+
+/* If everything is okay with the petition, call the lib.php function
+ * tool_rafaellechugo_add_entry to write the data on DB.
+ * By the way, why do I have to require lib.php on this file? Shouldn't 
+ * it be autoloaded?
+ */
+if (!$mform->is_cancelled() && $data = $mform->get_data()) {
+    tool_rafaellechugo_add_entry($systemcontext, $id, $name, $completed);
+}
 
 // Setting the page.
 $url = new moodle_url('/admin/tool/rafaellechugo/index.php');
@@ -47,7 +65,6 @@ $PAGE->set_heading(get_string('pluginname', 'tool_rafaellechugo'));
 echo $OUTPUT->header();
 
 // Let's print the form.
-$mform = new tool_rafaellechugo_print_form($id);
 $mform->display();
 
 echo $OUTPUT->footer();

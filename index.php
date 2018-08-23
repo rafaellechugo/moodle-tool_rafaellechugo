@@ -22,12 +22,12 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// Standard GPL and phpdocs.
 require_once(__DIR__ . '/../../../config.php');
 require_once(__DIR__ . '/classes/print_data.php');
 
-// Defining some useful variables.
+// Defining variables.
 global $DB;
+
 $id = required_param('id', PARAM_ALPHANUMEXT);
 $course = $DB->get_record('course', array('id' => $id), '*', MUST_EXIST);
 
@@ -44,7 +44,10 @@ $PAGE->set_pagelayout('report');
 $PAGE->set_title('My first Moodle plugin');
 $PAGE->set_heading(get_string('pluginname', 'tool_rafaellechugo'));
 
-// Retrieving data from DB.
+/* Retrieving data from DB.
+ * I'm pretty sure that this SQL code shouldn't be here.
+ * Maybe it should be in a lib function?
+ */
 $query = "  SELECT id, name
             FROM {course_categories}
             WHERE id = (
