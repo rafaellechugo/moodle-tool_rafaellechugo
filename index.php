@@ -51,9 +51,9 @@ $PAGE->set_heading(get_string('pluginname', 'tool_rafaellechugo'));
 $query = "  SELECT id, name
             FROM {course_categories}
             WHERE id = (
-            SELECT category
-            FROM {course}
-            WHERE id = $id);";
+                SELECT category
+                FROM {course}
+                WHERE id = $id);";
 
 $coursecategory    = $DB->get_records_sql($query);
 $coursedata        = $DB->get_records(
